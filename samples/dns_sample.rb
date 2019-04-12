@@ -30,6 +30,10 @@ pcap = PseudoConn.pcap do
   # Perform a query and get an answer in one call.
   dns_lookup('www.sample.com', '6.7.8.9')
 
+  # Perform a query and include EDNS Client Subnet
+  dns_lookup('www.sample.com', '6.7.8.9', PseudoConn::PSEUDO_DNS_A, :src_ip => '1.2.3.4',
+              additional: [PseudoConn::OPT_CSUBNET, PseudoConn::PSEUDO_DNS_OPT, '1.2.3.0/24'])
+
   # Peform a query, get back an NX domain
   dns_lookup('www.this.host.aint.real.org', nil)
 
